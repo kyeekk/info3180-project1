@@ -8,7 +8,9 @@ import datetime
 from app import app, db
 from flask import render_template, request, redirect, url_for, flash
 from app.forms import ProfileForm
-from werkzeug.security import check_password_hash
+from app.models import UserProfile
+import os
+from werkzeug.utils import secure_filename
 
 ###
 # Routing for the application.
@@ -26,15 +28,46 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/profile')
+@app.route('/profile',  methods=['GET', 'POST'])
 def profile():
-    """Render the website's add profile form."""
+    
+    form = ProfileForm
+    
+    if request.method == "POST" and form.validate_on_submit():
+        file = form.picture.database
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(path, filename))
+        
+        user = UserProfile(
+            request.form['fname'],
+            request.form['lname'],
+            request.form['email'],
+            request.form['location'],
+            request.form['gender'],
+            request.form['bio'],
+            filename,
+            datetime.datetime.now().strftime("%B %d, %Y")
+        )
+        
+        db.session.add(user)
+        db.session.commit()
+        
+        flash('Profile Saved', 'success')
+        return redirect(url_for("profiles"))
     return render_template('profile.html')
+    
     
 @app.route('/profiles')   
 def profiles():
+    profiles = db.session.query(UserProfile).all()
     """Render all the profiles in the websites database"""
     return render_template('profiles.html')
+    
+    
+@app.route('/profile/<int:userid>')
+def showprofile(userid):
+    user = db.session.query(UserProfile).get(userid)
+    return render_template('individual_profile.hmtl', user=user)
     
     
 ###
