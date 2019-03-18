@@ -39,12 +39,12 @@ def profile():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
         user = UserProfile(
-            request.form['fname'],
-            request.form['lname'],
+            request.form['firstname'],
+            request.form['lastname'],
             request.form['email'],
             request.form['location'],
             request.form['gender'],
-            request.form['bio'],
+            request.form['biography'],
             filename,
             datetime.datetime.now().strftime("%B %d, %Y")
         )
