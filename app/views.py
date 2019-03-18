@@ -31,12 +31,12 @@ def about():
 @app.route('/profile',  methods=['GET', 'POST'])
 def profile():
     
-    form = ProfileForm
+    form = ProfileForm()
     
     if request.method == "POST" and form.validate_on_submit():
         file = form.picture.database
         filename = secure_filename(file.filename)
-        file.save(os.path.join(path, filename))
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
         user = UserProfile(
             request.form['fname'],

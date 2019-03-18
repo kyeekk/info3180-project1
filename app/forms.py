@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import Form, StringField, TextAreaField, SelectField
+from wtforms import Form, StringField, TextAreaField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Email, InputRequired, Length
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
@@ -19,4 +19,5 @@ class ProfileForm(FlaskForm):
         FileRequired("You need a profile pic."), 
         FileAllowed(['jpg','png'], 'Images only!')
     ])
+    submit = SubmitField("Add Profile")
     
