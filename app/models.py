@@ -10,26 +10,26 @@ class UserProfile(db.Model):
     __tablename__ = 'user_profiles'
 
     id = db.Column(db.Integer, primary_key=True)
-    fname = db.Column(db.String(40))
-    lname = db.Column(db.String(40))
+    firstname = db.Column(db.String(40))
+    lastname = db.Column(db.String(40))
     email = db.Column(db.String(80), unique=True)
     location = db.Column(db.String(80))
     gender = db.Column(db.String(6))
     biography = db.Column(db.String(1000))
-    image = db.Column(db.String(40))
+    picture = db.Column(db.String(40))
     timeStamp = db.Column(db.String(40))
     # timeStamp = db.Column(db.DateTime(40))# ask about this
     
     # username = db.Column(db.String(80), unique=True)
     
-    def __init__(self, fname, lname, email, location, gender, bio, fileName, time):
-        self.fname = fname
-        self.lname = lname
+    def __init__(self, firstname, lastname, email, location, gender, bio, fileName, time):
+        self.firstname = firstname
+        self.lastname = lastname
         self.email = email
         self.location = location
         self.gender = gender
         self.biography = bio
-        self.image = fileName
+        self.picture = fileName
         self.timeStamp = time
 
 

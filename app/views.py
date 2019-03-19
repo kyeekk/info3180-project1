@@ -34,7 +34,7 @@ def profile():
     form = ProfileForm()
     
     if request.method == "POST" and form.validate_on_submit():
-        file = form.picture.database
+        file = form.picture.data
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         
@@ -54,20 +54,21 @@ def profile():
         
         flash('Profile Saved', 'success')
         return redirect(url_for("profiles"))
-    return render_template('profile.html')
+        
+    return render_template('profile.html', form=form)
     
     
 @app.route('/profiles')   
 def profiles():
     profiles = db.session.query(UserProfile).all()
     """Render all the profiles in the websites database"""
-    return render_template('profiles.html')
+    return render_template('profiles.html', user_profiles = profiles)
     
     
 @app.route('/profile/<int:userid>')
-def showprofile(userid):
-    user = db.session.query(UserProfile).get(userid)
-    return render_template('individual_profile.hmtl', user=user)
+def individual_profile(userid):
+    userid = db.session.query(UserProfile).get(userid)
+    return render_template('individual_profile.hmtl', user=userid)
     
     
 ###

@@ -2,10 +2,10 @@
 
 {% block main %} 
     <div class="card">
-        <img class="profile-pic"src="{{ url_for('static', filename='images/'+user.image) }}"></img>
+        <img class="profile-pic" src="{{ url_for('static', filename='images/'+user.image) }}"></img>
         
         <div class="bio">
-            <h2>{{ user.fname }} {{ user.lname }}</h2>
+            <h2>{{ user.firstname }} {{ user.lastname }}</h2>
             <div class="profile-stats">
                 <i class="far fa-envelope"></i>
                 {{ user.email }}
