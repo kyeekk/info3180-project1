@@ -7,6 +7,17 @@ form{
     margin-top: 2em;
 }
 
-.page-header{
-    margin-top: 10em;
+h2{
+    margin-top: 5em;
+    font-size: 20px;
+}
+
+.profile-pic{
+    margin-top: 9em;
+    height: 50%;
+    width: 200px;
+}
+
+.bio{
+    margin-top: 3em;
 }

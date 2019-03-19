@@ -4,14 +4,14 @@
 
   <div class=" top col-md-8 mx-auto">
 
-    <h1 class="page-header font-weight-bold text-dark mt-4 mb-5">Profiles</h1>
+    <h2>Profiles</h2>
   
     {% include 'flash_messages.html' %}
     
     {% for profile in user_profiles %}
         <div class="profile-container bg-white blue-border-top rounded d-flex p-3 mb-4">
           <div class="profile-img col-md-3">
-            <img src="{{url_for('static', filename='uploads/' + profile.picture)}}" class="card-img" alt="...">
+            <img src="{{url_for('static', filename='images/' + profile.picture)}}" class="card-img" alt="...">
           </div>
           <div class="profile-info d-flex flex-column justify-content-center col-md-6">
             <p class="font-weight-bold text-capitalize">
@@ -28,8 +28,8 @@
             <p class="text-muted text-small"><i class="fas fa-map-marker-alt"></i> {{ profile.location }}</p>
           </div>
           <div class="view-profile col-md-3 d-flex align-items-center text-wrap">
-            <a href="{{ url_for('individual_profile', userid=profile.id)}}" 
-            class="font-weight-bold rounded btn btn-green btn-sm px-4 col-md-12">
+            <a href="{{ url_for('show_profile', userid=profile.id)}}" 
+            class="btn btn-primary font-weight-bold rounded btn btn-green btn-sm px-4 col-md-12">
               View Profile
             </a>
           </div>

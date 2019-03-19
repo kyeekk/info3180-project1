@@ -66,9 +66,9 @@ def profiles():
     
     
 @app.route('/profile/<int:userid>')
-def individual_profile(userid):
+def show_profile(userid):
     userid = db.session.query(UserProfile).get(userid)
-    return render_template('individual_profile.hmtl', user=userid)
+    return render_template('individual_profile.html', user=userid)
     
     
 ###
